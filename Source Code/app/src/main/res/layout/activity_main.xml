@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rootLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000">
+
+    <!-- Photo (size and side set in code, never cropped) -->
+    <ImageView
+        android:id="@+id/photoCard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|end"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        android:visibility="gone" />
+
+    <!-- Clock block (position set in code) -->
+    <LinearLayout
+        android:id="@+id/clockBlock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|start"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-thin"
+            android:includeFontPadding="false"
+            android:textColor="#FFFFFF"
+            android:textSize="150sp" />
+
+        <TextView
+            android:id="@+id/tvDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textColor="#B3FFFFFF"
+            android:textSize="22sp" />
+    </LinearLayout>
+
+    <!-- Battery: percent text plus a drawn battery icon -->
+    <LinearLayout
+        android:id="@+id/batteryRow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|end"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="40dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvBattery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#B3FFFFFF"
+            android:textSize="15sp" />
+
+        <com.byawarta.dailyboardphone.BatteryView
+            android:id="@+id/batteryIcon"
+            android:layout_width="34dp"
+            android:layout_height="18dp"
+            android:layout_marginStart="8dp" />
+    </LinearLayout>
+
+    <!-- Calendar: its own corner, so it never overlaps the centered pill -->
+    <TextView
+        android:id="@+id/tvEvent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|start"
+        android:layout_marginStart="40dp"
+        android:layout_marginBottom="32dp"
+        android:maxWidth="220dp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:textColor="#80FFFFFF"
+        android:textSize="13sp" />
+
+    <!-- Now playing pill (shorter, centered at the bottom) -->
+    <LinearLayout
+        android:id="@+id/nowPlaying"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/pill_bg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="10dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="8dp"
+        android:paddingBottom="8dp">
+
+        <ImageView
+            android:id="@+id/albumArt"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvSongTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="Nothing playing"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvArtist"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="#99FFFFFF"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/btnPrev"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:layout_marginStart="2dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Previous"
+            android:padding="6dp"
+            android:src="@android:drawable/ic_media_previous"
+            android:tint="#FFFFFF" />
+
+        <ImageButton
+            android:id="@+id/btnPlayPause"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Play or pause"
+            android:padding="6dp"
+            android:src="@android:drawable/ic_media_play"
+            android:tint="#FFFFFF" />
+
+        <ImageButton
+            android:id="@+id/btnNext"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Next"
+            android:padding="6dp"
+            android:src="@android:drawable/ic_media_next"
+            android:tint="#FFFFFF" />
+
+        <com.byawarta.dailyboardphone.WaveView
+            android:id="@+id/wave"
+            android:layout_width="30dp"
+            android:layout_height="18dp"
+            android:layout_marginStart="6dp" />
+    </LinearLayout>
+
+    <!-- Small translucent X that appears when you tap the screen -->
+    <TextView
+        android:id="@+id/btnOpenMenu"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:layout_gravity="bottom|end"
+        android:layout_marginBottom="48dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/x_bg"
+        android:gravity="center"
+        android:text="✕"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:visibility="gone" />
+
+    <!-- Settings menu -->
+    <ScrollView
+        android:id="@+id/menuPanel"
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="24dp"
+        android:background="#F2111111"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Settings"
+                android:textColor="#FFFFFF"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btnPhoto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:backgroundTint="#33FFFFFF"
+                android:text="Choose photo"
+                android:textColor="#FFFFFF" />
+
+            <Button
+                android:id="@+id/btnPosition"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:backgroundTint="#33FFFFFF"
+                android:text="Clock position"
+                android:textColor="#FFFFFF" />
+
+            <Button
+                android:id="@+id/btnPhotoPos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:backgroundTint="#33FFFFFF"
+                android:text="Photo position"
+                android:textColor="#FFFFFF" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Photo size"
+                android:textColor="#B3FFFFFF"
+                android:textSize="13sp" />
+
+            <SeekBar
+                android:id="@+id/seekSize"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="100" />
+
+            <Button
+                android:id="@+id/btnOrient"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:backgroundTint="#33FFFFFF"
+                android:text="Orientation"
+                android:textColor="#FFFFFF" />
+
+            <Button
+                android:id="@+id/btnNotif"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:backgroundTint="#33FFFFFF"
+                android:text="Allow song info"
+                android:textColor="#FFFFFF" />
+
+            <Button
+                android:id="@+id/btnCal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:backgroundTint="#33FFFFFF"
+                android:text="Allow calendar"
+                android:textColor="#FFFFFF" />
+
+            <Button
+                android:id="@+id/btnDone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="#FFFFFFFF"
+                android:text="Done"
+                android:textColor="#000000" />
+        </LinearLayout>
+    </ScrollView>
+</FrameLayout>
